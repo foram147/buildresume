@@ -1,0 +1,14 @@
+.navFont{
+font-size: 100%;
+font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.navNav{
+    column-gap: 2em;
+    margin-right: 35px;
+  }
+
+.navBtn{
+    margin-right: -75px !important;
+  
+}
