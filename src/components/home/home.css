@@ -12,3 +12,64 @@ font-family:Georgia, 'Times New Roman', Times, serif;
     margin-right: -75px !important;
   
 }
+
+.card-size{
+  
+  height: 30vw;
+  width: 100%;
+}
+
+.card-box{
+  position:relative;
+}
+
+.card-image-background,
+.card-image-layer{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  }
+
+  .card-image-layer{
+    background: rgba(0,0,0,0.5);
+    z-index: 2;
+      }
+
+.card-image-background{
+  background-size: cover;
+   z-index: 1;
+}
+
+.image-box{
+
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), var(--image-url) center center;
+
+  /* Here's the same styles we applied to our content-div earlier */
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+}
+
+.footer{
+  background-color: black;
+  padding: 2%;
+  
+}
+.footerFonts{
+  color: rgb(69, 69, 196); 
+  font-family:Georgia, 'Times New Roman', Times, serif;
+ padding: 3%;
+}
+
+.footerLinks{
+  text-decoration: none;
+}
+.footerLinks:hover{
+  text-decoration:underline;
+}

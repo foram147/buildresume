@@ -5,9 +5,9 @@ import './home.css'
 const HomeNav = ()=>{
     return(
         <>
-       
-       <Navbar collapseOnSelect fixed='top' className="navFont"  bg="light" variant="light" expand="sm">
-        <Container>
+       <Container fluid>
+       <Navbar collapseOnSelect className="navFont"  bg="light" variant="light" expand="sm">
+        
         <Navbar.Brand href="#home" style={{marginLeft:'20px'}}>
         <img
           alt=""
@@ -32,13 +32,15 @@ const HomeNav = ()=>{
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
-        </Nav>
-        <Button  variant="link">Sign In</Button>
+            <Button  variant="link">Sign In</Button>
         <Button className="navBtn" variant="outline-success">Login</Button>
      
+        </Nav>
+        
       </Navbar.Collapse>
-        </Container>
+        
       </Navbar>
+      </Container>
             </>
  
     )

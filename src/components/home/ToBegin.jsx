@@ -1,19 +1,23 @@
-import { Card } from "react-bootstrap"
-import tobegin from '../../assets/tobegin.jpg'
-
+import { Card, Col, Row } from "react-bootstrap"
+import tobegin from '../../assets/download.jpg'
+import './home.css'
 const ToBegin =()=>{
     return(
         <>
-  
-  <Card className="bg-dark text-white my-5">
-  <Card.Img src={tobegin} alt="Card image" style={{width:'50%'}} />
-  <Card.ImgOverlay >
-    <Card.Title style={{marginLeft:'250px',fontSize:'50px'}}>Create Your CV</Card.Title>
-    <Card.Text> To begin, choose a CV template </Card.Text>
-    <Card.Text>At CV Creator, we know what it takes to make a great CV. If you are a Student, Graduate, Corporate or seeking a Career Change, we have the perfect CV for you. Pick one of our CV Templates and make the first step to your dream job. It’s time to “Create a CV”!</Card.Text>
+<div >
+<Card className="bg-dark text-white">
+  <Card.Img src={tobegin} style={{height:'35vw'}}  alt="Card image" />
+  <Card.ImgOverlay>
+    <h1 className="mt-1">Create a CV</h1>
+    
+    <Card.Text>
+      This is a wider card with supporting text below as a natural lead-in to
+      additional content. This content is a little bit longer.
+    </Card.Text>
+    <Card.Text>Last updated 3 mins ago</Card.Text>
   </Card.ImgOverlay>
 </Card>
- 
+</div>
 </>
     )
 }
