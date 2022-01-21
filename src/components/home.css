@@ -68,7 +68,7 @@ font-family:Georgia, 'Times New Roman', Times, serif;
 .footerFonts{
   color: rgb(69, 69, 196); 
   font-family:Georgia, 'Times New Roman', Times, serif;
- padding: 3%;
+ 
 }
 
 .footerLinks{
@@ -77,3 +77,25 @@ font-family:Georgia, 'Times New Roman', Times, serif;
 .footerLinks:hover{
   text-decoration:underline;
 }
+
+.LeftSide{
+  position: fixed;
+  
+ background-color: brown;
+ left: 7.8%;
+ 
+ 
+  left:1%;
+
+}
+
+.RightSide{
+  position: fixed;
+  right: 1%;
+ 
+padding-left: 15%; }
+
+ .Sharedspace{
+   
+   max-width: 50%;
+ }

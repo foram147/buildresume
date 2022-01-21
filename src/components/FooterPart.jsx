@@ -5,7 +5,7 @@ import {BsFileEarmarkText, BsPencilSquare, BsFileEarmarkRuled, BsLink} from "rea
 const FooterPart =() =>{
     return(
     <>
-    <Container fluid className='justify-content-end '>
+    <div>
         <Row xs={1} md={2} lg={6} className='footer justify-content-center'>
             <Col className='text-white  '>
                 <Row>
@@ -61,12 +61,8 @@ const FooterPart =() =>{
             </Col>
         </Row>
 
-        <Row xs={1} md={2} lg={6} className='footer justify-content-center'>
-      
-
         
-        </Row>
-        </Container>
+        </div>
             
     </>
     )

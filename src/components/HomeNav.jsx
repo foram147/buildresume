@@ -1,7 +1,8 @@
 import {Container,Navbar,Nav,NavDropdown,Form,FormControl,Button,Col,Row} from 'react-bootstrap'
-import logo from "../../assets/logo.png"
+import logo from "../assets/logo.png"
 import './home.css'
-
+import Testing from '../components/home/Testing'
+import MakeCV from './home/MakeCV'
 const HomeNav = ()=>{
     return(
         <>
@@ -14,7 +15,7 @@ const HomeNav = ()=>{
           <Navbar.Toggle aria-controls='ressponsive-navbar-nav'/>
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end" style={{marginRight:'140px'}} >
               <Nav className="navNav" >
-                <Nav.Link  href="#features" >Resume</Nav.Link>
+                <Nav.Link  href="/testing" >Resume</Nav.Link>
                 <Nav.Link  href="#pricing" >Cover Letter</Nav.Link>
                 <Nav.Link  href="#pricing" >Jobs</Nav.Link>
       
