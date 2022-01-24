@@ -5,7 +5,7 @@ import {BsFileEarmarkText, BsPencilSquare, BsFileEarmarkRuled, BsLink} from "rea
 const FooterPart =() =>{
     return(
     <>
-    <div>
+    <div fixed="bottom">
         <Row xs={1} md={2} lg={6} className='footer justify-content-center'>
             <Col className='text-white  '>
                 <Row>
