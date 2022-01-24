@@ -99,3 +99,8 @@ padding-left: 15%; }
    
    max-width: 50%;
  }
+
+ .ColBorder{
+   border-right: rgba(0,0,0,0.5);
+   border-right: 5px;
+ }

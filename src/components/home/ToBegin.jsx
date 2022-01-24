@@ -9,7 +9,7 @@ const ToBegin =(props)=>{
   const[userId, setUserId] = useState(props.id)
   const [user,setUser] = useState({})
 
-  async function getData(){
+  /*async function getData(){
     const response = await fetch(`http://localhost:3001/user/${userId}`)
     const userData = await response.json()
     setUser(userData)
@@ -17,7 +17,7 @@ const ToBegin =(props)=>{
   }
   useEffect(()=>{
     getData();
-  },[])
+  },[])*/
   
   return(
         <>
