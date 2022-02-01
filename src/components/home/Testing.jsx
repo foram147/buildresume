@@ -4,7 +4,7 @@ import FooterPart from "../FooterPart"
 import  OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import  Tooltip from "react-bootstrap/Tooltip"
 import "../home.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useFormik } from "formik"
 import * as yup from "yup"
@@ -48,6 +48,7 @@ async function submitData(body,file){
     })
     if(response.ok){
       let responseJSON = await response.json()
+      console.log("data saved")
       if(isFileUploaded){
         uploadImage(responseJSON._id,file)
       }
@@ -73,27 +74,31 @@ const {values,
       personalstatement:"",
       skills:"",
       hobbies:"",
-      expstartdate:"",
-      expenddate:"",
-      expposition:"",
-      expcompany:"",
-      expjobrole:"",
+      experience:[{
+        expstartdate:"",
+        expenddate:"",
+        expposition:"",
+        expcompany:"",
+        expjobrole:"",
+      }],
+     education:[{
       edustartdate:"",
       eduenddate:"",
       edudegree:"",
       eduinstitution:"",
       educourse:""
+     }]
+      
 
 
     },
     onSubmit: (values) =>{
-      submitData(values, file)
+       submitData(values, file)
       alert(JSON.stringify(values))
       
     }
   })
 
-  
 
   return(
       
@@ -101,15 +106,15 @@ const {values,
     
      <HomeNav/>
      <Container style={{height:"100%", width:"100%"}}>
-     <Row>
+      <Row>
        <Col>
        <Form onSubmit={handleSubmit} >
-           <Accordion  defaultActiveKey="0" alwaysOpen>
+           <Accordion  defaultActiveKey={["0"]} alwaysOpen>
             <Accordion.Item eventKey="0">
             <Accordion.Header>Profile</Accordion.Header>
             <Accordion.Body>
+            
             <Form>
-
             <Button
                       className="default-btn-style ml-2"
                       variant="outline-primary"
@@ -137,7 +142,7 @@ const {values,
                         ></FormControl>
                       </Form.Group>
                     }
-
+          
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Your Name</Form.Label>
                   <OverlayTrigger 
@@ -146,43 +151,43 @@ const {values,
                     <Tooltip {...props}>Enter your Name and Surname Ex. John Doe
                     </Tooltip>
                   )}>
-                    <Form.Control name="name" type="name" value={values.name} />
+                    <Form.Control name="name" type="name"   value={values.name} onChange={handleChange} />
                   </OverlayTrigger>
               </Form.Group>
+              <Form.Group className="mb-3" controlId="formJob">
+              <Form.Label>Your Job</Form.Label>
+              <Form.Control type="job" name="job" value={values.job} onChange={handleChange}/>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formAddress">
+              <Form.Label>Postal Address</Form.Label>
+              <Form.Control type="text" name="postaladdress" value={values.postaladdress} onChange={handleChange}/>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formEmail">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control type="email" name="email" value={values.email} onChange={handleChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formContact">
+              <Form.Label>Contact No</Form.Label>
+              <Form.Control type="text" name="mobile" value={values.mobile} onChange={handleChange} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formDOB">
+              <Form.Label>Date Of Birth</Form.Label>
+              <Form.Control type="date" name="dob" value={values.dob} onChange={handleChange}/>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formPersonalStatement">
+              <Form.Label>Personal Statement</Form.Label>
+              <Form.Control as = "textarea" name="personalstatement" value={values.personalstatement} onChange={handleChange}/>
+              </Form.Group>
 
-  <Form.Group className="mb-3" controlId="formJob">
-    <Form.Label>Your Job</Form.Label>
-    <Form.Control type="job" name="job" value={values.job} onChange={handleChange}/>
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formAddress">
-    <Form.Label>Postal Address</Form.Label>
-    <Form.Control type="text" name="postaladdress" value={values.postaladdress} onChange={handleChange}/>
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formEmail">
-    <Form.Label>Email Address</Form.Label>
-    <Form.Control type="email" name="email" value={values.email} onChange={handleChange} />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formContact">
-    <Form.Label>Contact No</Form.Label>
-    <Form.Control type="text" name="mobile" value={values.mobile} onChange={handleChange} />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formDOB">
-    <Form.Label>Date Of Birth</Form.Label>
-    <Form.Control type="date" name="dob" value={values.dob} onChange={handleChange}/>
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formPersonalStatement">
-    <Form.Label>Personal Statement</Form.Label>
-    <Form.Control as = "textarea" name="personalstatement" value={values.personalstatement} onChange={handleChange}/>
-  </Form.Group>
-
-
-</Form>
-    </Accordion.Body>
+              
+            </Form>
+             
+            </Accordion.Body>
               </Accordion.Item>
             <Accordion.Item eventKey="1">
-    <Accordion.Header>2 SKILLS & HOBBIES</Accordion.Header>
-    <Accordion.Body>
-    <Form.Group className="mb-3" controlId="formName">
+            <Accordion.Header>2 SKILLS & HOBBIES</Accordion.Header>
+            <Accordion.Body>
+    <Form.Group className="mb-3" controlId="formSkills">
                 <Form.Label>Skills</Form.Label>
                   <OverlayTrigger 
                     placement = "bottom"
@@ -193,7 +198,7 @@ const {values,
                     <Form.Control name="skills" type="name" value={values.skills} onChange={handleChange} />
                   </OverlayTrigger>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
+              <Form.Group className="mb-3" controlId="formHobbies">
                 <Form.Label>Hobbies</Form.Label>
                   <OverlayTrigger 
                     placement = "bottom"
@@ -204,50 +209,50 @@ const {values,
                     <Form.Control name="hobbies" type="name" value={values.hobbies} onChange={handleChange} />
                   </OverlayTrigger>
               </Form.Group>
-    </Accordion.Body>
+            </Accordion.Body>
               </Accordion.Item>
 
-   <Accordion.Item eventKey="2">
-    <Accordion.Header>3 Professional Experience</Accordion.Header>
-    <Accordion.Body>
-    <Form.Group className="mb-3" controlId="formName">
+            <Accordion.Item eventKey="2">
+            <Accordion.Header>3 Professional Experience</Accordion.Header>
+            <Accordion.Body>
+              <Form.Group className="mb-3" controlId="formExpStartdate">
                 <Form.Label>Start Date</Form.Label>
                   
                     <Form.Control name="expstartdate" type="date" value={values.expstartdate} onChange={handleChange} />
                  
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
+              <Form.Group className="mb-3" controlId="formExpEnddate">
                 <Form.Label>End Date</Form.Label>
                   
                     <Form.Control name="expenddate" type="date" value={values.expenddate} onChange={handleChange} />
                   
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
+              <Form.Group className="mb-3" controlId="formExpPosition">
                 <Form.Label>Position Held</Form.Label>
                   
                     <Form.Control name="expposition" type="text" value={values.expposition} onChange={handleChange} />
                  
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
+              <Form.Group className="mb-3" controlId="formExpCompany">
                 <Form.Label>Company</Form.Label>
                   
-                    <Form.Control name="expcompany" type="text" value={values.expcompany} onChange={handleChange} />
+                    <Form.Control name="expcompany" type="text" value={values.experience.expcompany} onChange={handleChange} />
                  
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
+              <Form.Group className="mb-3" controlId="formExpJobrole">
                 <Form.Label>Job Description</Form.Label>
                   
-                    <Form.Control name="expjobrole" type="text" value={values.expjobrole} onChange={handleChange} />
+                    <Form.Control name="expjobrole" type="text" value={values.experience.expjobrole} onChange={handleChange} />
                  
               </Form.Group>
-    </Accordion.Body>
-  </Accordion.Item>
+            </Accordion.Body>
+             </Accordion.Item>
 
 
-  <Accordion.Item eventKey="3">
-    <Accordion.Header>4 Educational Background</Accordion.Header>
-    <Accordion.Body>
-    <Form.Group className="mb-3" controlId="formName">
+            <Accordion.Item eventKey="3">
+            <Accordion.Header>4 Educational Background</Accordion.Header>
+            <Accordion.Body>
+            <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Start Date</Form.Label>
                   
                     <Form.Control name="edustartdate" type="date" value={values.edustartdate} onChange={handleChange} />
@@ -277,12 +282,9 @@ const {values,
                     <Form.Control name="educourse" type="text" value={values.educourse} onChange={handleChange} />
                   
               </Form.Group>
-    </Accordion.Body>
-  </Accordion.Item>
-
-
+            </Accordion.Body>
+            </Accordion.Item>
             </Accordion>
-            </Form>
             <Button
                         className="default-btn-style ml-auto mr-2"
                         variant="primary"
@@ -291,11 +293,11 @@ const {values,
                         style={
                           ({ color: "white" }, { backgroundColor: "blue" })
                         }
-                        onClick={submitData()}
-                       
                       >
                         Save
-                      </Button>{" "}
+                      </Button>
+             
+           </Form>
             </Col>
             <Col className="w-100">
             <>

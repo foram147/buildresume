@@ -9,6 +9,7 @@ import HomeNav from "./HomeNav";
 import FooterPart from "./FooterPart";
 
 
+
 const home = () => {
 return(
   <>

@@ -1,8 +1,10 @@
 import { Card, Col, Row, Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import tobegin from '../../assets/download.jpg'
 import '../home.css'
 import MakeCV from "./MakeCV"
 import { useState, useEffect } from "react"
+import Login from "./Login"
 
 const ToBegin =(props)=>{
 
@@ -32,7 +34,7 @@ const ToBegin =(props)=>{
                 This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
             </Card.Text>
             <Card.Text>Last updated 3 mins ago</Card.Text>
-            <Button variant="primary" href="/makeCV">Create CV</Button>
+            <Link to="/login"  className="btn btn-primary">Login</Link>
             
           </Card.ImgOverlay>
       </Card>
