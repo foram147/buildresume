@@ -11,7 +11,10 @@ import * as yup from "yup"
 
 
 const Testing =(props)=>{
- const {id} = useParams(props)   
+ const {id} = useParams(props)  
+ const [user,setUser] = useState({}) 
+ const [profile,setProfile] = useState({})
+ const [experience,setExperience] = useState({})
  const [isAddMediaClicked,setAddMediaClicked] = useState(false);
 const [file,setFile]=useState(null)
 const [fileName, setFileName] = useState("Uploas image")
@@ -58,6 +61,17 @@ async function submitData(body,file){
     console.log(error)
   }
 }
+
+/*async function getData(){
+  const resp = await fetch(`http://localhost:3001/user/${id}`)
+  const userData = await resp.json();
+  setUser(userData);
+  console.log(user)
+}
+
+useEffect(()=>{
+  getData()
+},[])*/
 
 const {values,
   handleChange,

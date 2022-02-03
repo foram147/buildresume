@@ -11,6 +11,7 @@ class Login extends React.Component{
         show:false,
         userId:"",
         dataFetched:false,
+        isLoggedIn:false,
         login:{
             email:"",
             password:""
@@ -30,7 +31,8 @@ class Login extends React.Component{
       e.preventDefault();
       this.getLoggedIn();
       
-      //console.log(this.state.userId)
+                
+      console.log(this.state.userId)
       
       
       }
@@ -54,7 +56,7 @@ class Login extends React.Component{
                     userId=login.id
                     console.log(userId)
                     console.log("loginId= "+login.id,"token= "+login.token)
-                    
+                    this.props.navigate(`${userId}/profile`)
                     
                     
                 }
@@ -67,9 +69,8 @@ class Login extends React.Component{
      // const {navigation} = this.props;
       
     return(
-        <div>
-          
-            <Container >
+        <div> 
+        <Container >
         <Form onSubmit={this.handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -102,7 +103,6 @@ class Login extends React.Component{
                   //this.props.history.push(`/profile/`+this.state.login.id)
                     //this.navigator()
                 this.handleClose();
-                //this.props.navigate(`/profile`)
                  //<Navigate to="/profile/"+login.id/>
                 }}>
           Submit

@@ -10,14 +10,14 @@ import FooterPart from "./FooterPart";
 
 
 
-const home = () => {
+const home = (props) => {
 return(
   <>
   <Container>
     <Row>
       <Col>
-      <HomeNav/>
       
+      <HomeNav/>
       <ToBegin/>
       <SelectTemplate/>
       <FooterPart/>
