@@ -1,10 +1,21 @@
 import {Model, Button,Nav,Row,Col,Form, Container} from "react-bootstrap"
 import {useNavigate} from 'react-router-dom'
 import React from "react"
+import { useState } from "react"
+import { useParams } from "react-router"
+ 
 
-class Login extends React.Component{
+const Login = ()=> {
+  
     
-  constructor(props){
+    const [loginData,setLoginData]= useState({
+      email:"",
+      passwoed:""
+    })
+    const navigate = useNavigate()
+
+
+  /*constructor(props){
       super(props)
       
     this.state={
@@ -12,33 +23,27 @@ class Login extends React.Component{
         userId:"",
         dataFetched:false,
         isLoggedIn:false,
-        login:{
+        loginData:{
             email:"",
             password:""
         },
        
     };
-  }
-   
-
-    handleClose = () => this.setState({...this.state,show:false})
-    handleShow = () => this.setState({...this.state,show:true})
+  }*/
+   //function handleClose () this.setState({...this.state,show:false})
+   //function handleShow = () => this.setState({...this.state,show:true})
 
     
 
 
-  handleSubmit = (e) =>{
+  const handleSubmit = (e) =>{
       e.preventDefault();
-      this.getLoggedIn();
-      
-                
-      console.log(this.state.userId)
-      
+      getLoggedIn();
       
       }
 
 
-        getLoggedIn = async (login,userId)=>{
+       async function getLoggedIn  (){
             console.log("logedin")
             try{
                 const resp = await fetch(`http://localhost:3001/auth/login`,{
@@ -46,17 +51,21 @@ class Login extends React.Component{
                    headers:{
                     "Content-Type": "application/json"
                    } ,
-                   body: JSON.stringify(this.state.login)
+                   body: JSON.stringify(loginData)
                 }
                 );
                 if (resp.ok){
-                     login = await resp.json();
-                   // const Id = userid;
-                    //console.log(userId)
-                    userId=login.id
-                    console.log(userId)
-                    console.log("loginId= "+login.id,"token= "+login.token)
-                    this.props.navigate(`${userId}/profile`)
+                    const login = await resp.json();
+                    console.log("login resp data",login)
+                    const userId=login.id
+                    console.log("user id-----",userId)
+                    console.log("login token----",login.token)
+                    const accessToken= login.token
+                    localStorage.setItem('accessToken', accessToken)
+                    //localStorage.setItem('userId',userId)
+                    console.log("access token----",accessToken)
+                     //this.props.id(userId)
+                    navigate(`/profile/${userId}`)
                     
                     
                 }
@@ -65,22 +74,27 @@ class Login extends React.Component{
                 console.log(error)
             }
         }
-    render(){
-     // const {navigation} = this.props;
+    
+     
       
     return(
         <div> 
         <Container >
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" 
-          value={this.state.login.email}
-          onChange={(e)=>
+          value={loginData.email}
+          onChange= {(e) => setLoginData({
+            ...loginData,
+            email:e.target.value
+          })}
+          
+          /*{(e)=>
             this.setState({
               ...this.state,
-              login:{...this.state.login,email: e.target.value}
-          })}
+              loginData:{...this.state.loginData,email: e.target.value}
+          })}*/
           placeholder="Enter email" />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -90,21 +104,22 @@ class Login extends React.Component{
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password"
-          value={this.state.login.password}
+          value={loginData.password}
           onChange={(e)=>
-            this.setState({
+              setLoginData({
+                ...loginData,
+                password:e.target.value
+              })
+
+           /* this.setState({
               ...this.state,
-              login:{...this.state.login,password: e.target.value}
-          })}
+              loginData:{...this.state.loginData,password: e.target.value}
+          })*/
+        }
           placeholder="Password" />
         </Form.Group>
         
-        <Button variant="primary"  type="submit" onClick={async () => {
-                  //this.props.history.push(`/profile/`+this.state.login.id)
-                    //this.navigator()
-                this.handleClose();
-                 //<Navigate to="/profile/"+login.id/>
-                }}>
+        <Button variant="primary"  type="submit" >
           Submit
         </Button>
       </Form>
@@ -112,7 +127,7 @@ class Login extends React.Component{
     
       </div>
     )
-    }
+    
 }
 
 export default Login

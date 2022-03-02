@@ -16,7 +16,7 @@ const HomeNav = ()=>{
               <Nav className="navNav" >
                 <Nav.Link  href="/profile" >Resume</Nav.Link>
                 <Nav.Link  href="/login" >Cover Letter</Nav.Link>
-                <Nav.Link  href="#pricing" >Jobs</Nav.Link>
+                <Nav.Link  href="/makecv" >Jobs</Nav.Link>
       
                 <NavDropdown title="Career Advice" id="collasible-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

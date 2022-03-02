@@ -8,70 +8,29 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useFormik } from "formik"
 import * as yup from "yup"
+import Funprofile from "./Funprofile"
+import Skills from "./Skills"
+import Experience from "./Experience"
+import Education from "./Education"
+import Profile from "./Profile"
+
 
 
 const Testing =(props)=>{
  const {id} = useParams(props)  
- const [user,setUser] = useState({}) 
- const [profile,setProfile] = useState({})
- const [experience,setExperience] = useState({})
  const [isAddMediaClicked,setAddMediaClicked] = useState(false);
 const [file,setFile]=useState(null)
 const [fileName, setFileName] = useState("Uploas image")
 const [isFileUploaded, setFileUploaded] = useState(false)
-
+const token = localStorage.getItem('accessToken');
 let formData = new FormData()
 
-async function uploadImage(userId,file){
-  try{
-    let response = await fetch(`http://localhost:3001/user${userId}/picture`,
-    {
-      method:"POST",
-      body:file,
-    }
-    );
-    if(response.ok){
-      let responseData = await response.json()
-      console.log(responseData)
-    }
-  }catch(error){
-    console.log(error)
-  }
-}
+console.log("ID FROM TESTING",id)
 
-async function submitData(body,file){
-  try{
-    let response = await fetch(`http://localhost:3001/user`,
-    {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-      },
-      body: JSON.stringify(body)
-    })
-    if(response.ok){
-      let responseJSON = await response.json()
-      console.log("data saved")
-      if(isFileUploaded){
-        uploadImage(responseJSON._id,file)
-      }
-    }
 
-  }catch(error){
-    console.log(error)
-  }
-}
 
-/*async function getData(){
-  const resp = await fetch(`http://localhost:3001/user/${id}`)
-  const userData = await resp.json();
-  setUser(userData);
-  console.log(user)
-}
 
-useEffect(()=>{
-  getData()
-},[])*/
+
 
 const {values,
   handleChange,
@@ -79,15 +38,12 @@ const {values,
   errors,isValid,} = useFormik({
     initialValues:{
       image:"",
-      name:"",
-      job:"",
       postaladdress:"",
-      email:"",
       mobile:"",
       dob:"",
       personalstatement:"",
-      skills:"",
-      hobbies:"",
+      skills:[],
+      hobbies:[],
       experience:[{
         expstartdate:"",
         expenddate:"",
@@ -107,7 +63,7 @@ const {values,
 
     },
     onSubmit: (values) =>{
-       submitData(values, file)
+      // submitData(values, file)
       alert(JSON.stringify(values))
       
     }
@@ -122,196 +78,43 @@ const {values,
      <Container style={{height:"100%", width:"100%"}}>
       <Row>
        <Col>
-       <Form onSubmit={handleSubmit} >
+       
            <Accordion  defaultActiveKey={["0"]} alwaysOpen>
             <Accordion.Item eventKey="0">
             <Accordion.Header>Profile</Accordion.Header>
             <Accordion.Body>
             
-            <Form>
-            <Button
-                      className="default-btn-style ml-2"
-                      variant="outline-primary"
-                      onClick={() => {
-                        setAddMediaClicked(true);
-                      }}
-                    >
-                      {" "}
-                      + Add Media
-                    </Button>{" "}
-                    {isAddMediaClicked &&
-                      <Form.Group>
-                        <FormControl
-                          type="file"
-                          id="userImageUpload2"
-                          label={fileName}
-                          onChange={(e) => {
-                            setFileName(e.target.files[0].filename);
-                            setFileUploaded(true)
-                            formData.append("user", e.target.files[0]);
-                            setFile(formData);
-                          }}
-                          custom
-                          style={{ width: "30vw" }}
-                        ></FormControl>
-                      </Form.Group>
-                    }
-          
-              <Form.Group className="mb-3" controlId="formName">
-                <Form.Label>Your Name</Form.Label>
-                  <OverlayTrigger 
-                    placement = "bottom"
-                    overlay={(props) =>(
-                    <Tooltip {...props}>Enter your Name and Surname Ex. John Doe
-                    </Tooltip>
-                  )}>
-                    <Form.Control name="name" type="name"   value={values.name} onChange={handleChange} />
-                  </OverlayTrigger>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formJob">
-              <Form.Label>Your Job</Form.Label>
-              <Form.Control type="job" name="job" value={values.job} onChange={handleChange}/>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formAddress">
-              <Form.Label>Postal Address</Form.Label>
-              <Form.Control type="text" name="postaladdress" value={values.postaladdress} onChange={handleChange}/>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control type="email" name="email" value={values.email} onChange={handleChange} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formContact">
-              <Form.Label>Contact No</Form.Label>
-              <Form.Control type="text" name="mobile" value={values.mobile} onChange={handleChange} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formDOB">
-              <Form.Label>Date Of Birth</Form.Label>
-              <Form.Control type="date" name="dob" value={values.dob} onChange={handleChange}/>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formPersonalStatement">
-              <Form.Label>Personal Statement</Form.Label>
-              <Form.Control as = "textarea" name="personalstatement" value={values.personalstatement} onChange={handleChange}/>
-              </Form.Group>
-
-              
-            </Form>
+            <Profile id={id}/>
              
             </Accordion.Body>
               </Accordion.Item>
             <Accordion.Item eventKey="1">
             <Accordion.Header>2 SKILLS & HOBBIES</Accordion.Header>
             <Accordion.Body>
-    <Form.Group className="mb-3" controlId="formSkills">
-                <Form.Label>Skills</Form.Label>
-                  <OverlayTrigger 
-                    placement = "bottom"
-                    overlay={(props) =>(
-                    <Tooltip {...props}>Enter your Name and Surname Ex. John Doe
-                    </Tooltip>
-                  )}>
-                    <Form.Control name="skills" type="name" value={values.skills} onChange={handleChange} />
-                  </OverlayTrigger>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formHobbies">
-                <Form.Label>Hobbies</Form.Label>
-                  <OverlayTrigger 
-                    placement = "bottom"
-                    overlay={(props) =>(
-                    <Tooltip {...props}>Enter your Name and Surname Ex. John Doe
-                    </Tooltip>
-                  )}>
-                    <Form.Control name="hobbies" type="name" value={values.hobbies} onChange={handleChange} />
-                  </OverlayTrigger>
-              </Form.Group>
+            <Skills id={id} />
             </Accordion.Body>
               </Accordion.Item>
 
-            <Accordion.Item eventKey="2">
-            <Accordion.Header>3 Professional Experience</Accordion.Header>
+              
+            <Accordion.Item eventKey="3">
+            <Accordion.Header>3 Educational Background</Accordion.Header>
             <Accordion.Body>
-              <Form.Group className="mb-3" controlId="formExpStartdate">
-                <Form.Label>Start Date</Form.Label>
-                  
-                    <Form.Control name="expstartdate" type="date" value={values.expstartdate} onChange={handleChange} />
-                 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formExpEnddate">
-                <Form.Label>End Date</Form.Label>
-                  
-                    <Form.Control name="expenddate" type="date" value={values.expenddate} onChange={handleChange} />
-                  
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formExpPosition">
-                <Form.Label>Position Held</Form.Label>
-                  
-                    <Form.Control name="expposition" type="text" value={values.expposition} onChange={handleChange} />
-                 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formExpCompany">
-                <Form.Label>Company</Form.Label>
-                  
-                    <Form.Control name="expcompany" type="text" value={values.experience.expcompany} onChange={handleChange} />
-                 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formExpJobrole">
-                <Form.Label>Job Description</Form.Label>
-                  
-                    <Form.Control name="expjobrole" type="text" value={values.experience.expjobrole} onChange={handleChange} />
-                 
-              </Form.Group>
+            <Education id={id}/>
+            </Accordion.Body>
+            </Accordion.Item>
+
+            <Accordion.Item eventKey="2">
+            <Accordion.Header>4 Professional Experience</Accordion.Header>
+            <Accordion.Body>
+              <Experience id={id}/>
             </Accordion.Body>
              </Accordion.Item>
 
 
-            <Accordion.Item eventKey="3">
-            <Accordion.Header>4 Educational Background</Accordion.Header>
-            <Accordion.Body>
-            <Form.Group className="mb-3" controlId="formName">
-                <Form.Label>Start Date</Form.Label>
-                  
-                    <Form.Control name="edustartdate" type="date" value={values.edustartdate} onChange={handleChange} />
-                 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
-                <Form.Label>End Date</Form.Label>
-                  
-                    <Form.Control name="eduenddate" type="date" value={values.eduenddate} onChange={handleChange} />
-                  
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
-                <Form.Label>Degree/ Qualification</Form.Label>
-                  
-                    <Form.Control name="edudegree" type="text" value={values.edudegree} onChange={handleChange} />
-                  
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
-                <Form.Label>Institution</Form.Label>
-                  
-                    <Form.Control name="eduinstitution" type="text" value={values.eduinstitution} onChange={handleChange} />
-                  
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formName">
-                <Form.Label>Course Description</Form.Label>
-                  
-                    <Form.Control name="educourse" type="text" value={values.educourse} onChange={handleChange} />
-                  
-              </Form.Group>
-            </Accordion.Body>
-            </Accordion.Item>
             </Accordion>
-            <Button
-                        className="default-btn-style ml-auto mr-2"
-                        variant="primary"
-                        type="submit"
-                        disabled={isValid ? false : true}
-                        style={
-                          ({ color: "white" }, { backgroundColor: "blue" })
-                        }
-                      >
-                        Save
-                      </Button>
+           
              
-           </Form>
+           
             </Col>
             <Col className="w-100">
             <>
@@ -321,7 +124,7 @@ const {values,
                 <Card style={{ width: '15rem' }}>
                 <Card.Img variant="top" src={values.image} />
                   <Card.Body>
-                  <Card.Title>Name  {values.name}</Card.Title>
+                  <Card.Title>Name  {props.name}</Card.Title>
                   <Card.Title>Job{values.job}</Card.Title>
                  <Card.Text>Address{values.postaladdress}  </Card.Text>
                  <Card.Text>Email{values.email}  </Card.Text>
