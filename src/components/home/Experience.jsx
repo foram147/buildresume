@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Form ,Button} from "react-bootstrap"
 import { useNavigate } from "react-router";
+import moment from "moment"
+
 
 const Experience = (props)=>{
     const {id} = useParams()

@@ -23,7 +23,7 @@ const ToBegin =(props)=>{
   
   return(
         <>
-<div >
+<div>
   <Row>
     <Col>
       <Card className="bg-dark text-white">

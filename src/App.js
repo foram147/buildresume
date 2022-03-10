@@ -7,7 +7,7 @@
   import MakeCV from './components/home/MakeCV';
   import Profile from './components/home/Profile';
   import Experience from './components/home/Experience';
-
+  import Preview from './components/home/Preview'
   
   function App() {
      return (
@@ -22,7 +22,7 @@
           <Route path='/login' element={<Login/>}/>
         <Route path="/profile/:id" element={<Testing/>} />
         <Route path='/experience/:id' element={<Experience/>}/>
-        <Route path="/preview/:id" element={<MakeCV/>}/>
+        <Route path="/preview/:id" element={<Preview/>}/>
         </Routes>
       
       </BrowserRouter>

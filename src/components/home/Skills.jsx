@@ -76,20 +76,7 @@ async function saveHobby(){
         <Form.Control name="skills" type="name" value={skill}
          onChange={(e) => setSkill(e.target.value)} />
       </OverlayTrigger>
-      <Button
-              style={{
-                borderRadius: "50%",
-                height: "35px",
-                marginLeft: "4px",
-                marginRight: "4px",
-              }}
-              variant="success"
-              onClick={async () => {
-                saveSkill();
-              }}
-            >
-              Save
-            </Button>
+    
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formSkills">
@@ -112,6 +99,7 @@ async function saveHobby(){
               }}
               variant="success"
               onClick={async () => {
+                saveSkill()
                 saveHobby();
               }}
             >

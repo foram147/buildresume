@@ -116,7 +116,7 @@ const {values,
              
            
             </Col>
-            <Col className="w-100">
+        <Col className="w-100">
             <>
             <Container >
               <Row className="w-100">
@@ -160,7 +160,7 @@ const {values,
             </Container>
 </>
             </Col>
-            </Row>  
+      </Row>  
       </Container>
       <FooterPart/>
       </div>
