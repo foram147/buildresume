@@ -28,30 +28,6 @@ const Profile =(props)=>{
  console.log("userId----",id)
  
  
-  /*constructor(props){
-   super(props)
-   console.log(props)
-  this. state={
-    
-    userId: this.props.id,
-    profileData:{},
-    formData: new FormData(),
-    file:null,
-    fileName: null,
-    isFileUploaded: false
-   }
- }*/
-  /*function target  (e){
-    console.log(e.target.files[0])
-  if (e.target && e.target.files[0]) {
-    this.state.formData.append("buildresume", e.target.files[0],
-    this.setState({
-      ...this.state,
-      profileData: { ...this.state.profileData,
-        image :this.state.formData, file: e.target.files[0] },
-    }))
-}
-   }*/
 
     async function uploadImage  (profileId,file) {
       console.log("i am post image");
